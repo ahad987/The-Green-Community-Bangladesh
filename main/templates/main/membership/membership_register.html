@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Membership Registration{% endblock %}
+
+{% block content %}
+{% include 'includes/breadcrumb.html' %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-success text-white text-center py-4">
+                    <h4 class="mb-0">Membership Registration Form</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form method="POST" action=""> <!-- Frontend only, no action needed -->
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-control" placeholder="Enter your full name">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-control" placeholder="Enter email">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Phone Number</label>
+                                <input type="text" class="form-control" placeholder="Enter phone">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Membership Type</label>
+                            <select class="form-select">
+                                <option>Student Membership</option>
+                                <option>General Membership</option>
+                                <option>Lifetime Membership</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="terms">
+                            <label class="form-check-label" for="terms">I agree to the terms and conditions</label>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success btn-lg">Submit Registration</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

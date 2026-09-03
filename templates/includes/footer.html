@@ -1,0 +1,35 @@
+<footer class="bg-dark text-white-50 pt-5 pb-3 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h5 class="text-white mb-3">The Green Community Bangladesh</h5>
+                <p>Working towards a sustainable, greener, and cleaner Bangladesh for future generations.</p>
+            </div>
+            <div class="col-md-2">
+                <h6 class="text-white">Quick Links</h6>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'home' %}" class="text-white-50 text-decoration-none">Home</a></li>
+                    <li><a href="{% url 'org_profile' %}" class="text-white-50 text-decoration-none">About</a></li>
+                    <li><a href="{% url 'contact' %}" class="text-white-50 text-decoration-none">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h6 class="text-white">Activities</h6>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'events_list' %}" class="text-white-50 text-decoration-none">Events</a></li>
+                    <li><a href="{% url 'volunteer_home' %}" class="text-white-50 text-decoration-none">Volunteer</a></li>
+                    <li><a href="{% url 'gallery_albums' %}" class="text-white-50 text-decoration-none">Gallery</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h6 class="text-white">Contact Us</h6>
+                <p class="small mb-1"><i class="bi bi-geo-alt"></i> Green Road, Dhaka, Bangladesh</p>
+                <p class="small mb-1"><i class="bi bi-envelope"></i> info@tgcb.org.bd</p>
+            </div>
+        </div>
+        <hr class="bg-secondary">
+        <div class="text-center small">
+            &copy; {% now "Y" %} The Green Community Bangladesh. All Rights Reserved.
+        </div>
+    </div>
+</footer>

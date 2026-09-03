@@ -1,0 +1,32 @@
+:root {
+    --primary-green: #198754;
+    --accent-leaf: #80c783;
+    --bg-light: #f8f9fa;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-light);
+    color: #333;
+}
+
+.topbar a:hover { opacity: 0.8; }
+.navbar-brand { font-size: 1.5rem; }
+.card { border-radius: 0.75rem; }
+.card-img-top { border-radius: 0.75rem 0.75rem 0 0; }
+
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.sidebar .nav-link.active {
+    background-color: var(--primary-green);
+    color: white !important;
+}
+.sidebar .nav-link:hover {
+    background-color: rgba(25, 135, 84, 0.2);
+    color: white !important;
+}

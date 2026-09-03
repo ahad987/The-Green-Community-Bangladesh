@@ -1,0 +1,10 @@
+<div class="bg-light py-3 mb-4">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-decoration-none">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{% block breadcrumb_item %}Page{% endblock %}</li>
+            </ol>
+        </nav>
+    </div>
+</div>
