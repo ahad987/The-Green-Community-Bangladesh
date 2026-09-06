@@ -14,6 +14,10 @@ class RegisterForm(UserCreationForm):
         email = self.cleaned_data['email'].lower()
         if User.objects.filter(email__iexact=email).exists(): raise forms.ValidationError('An account with this email already exists.')
         return email
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs.update({ 'class': 'form-control' })
 
 class MembershipForm(forms.ModelForm):
     class Meta:
