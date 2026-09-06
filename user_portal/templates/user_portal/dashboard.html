@@ -1,6 +1,6 @@
 {% extends 'user_portal/base_user_portal.html' %}
 
-{% block portal_title %}My Dashboard{% endblock %}
+{% block portal_title %}Welcome, {{ request.user.first_name|default:request.user.username }}{% endblock %}
 
 {% block portal_content %}
 <div class="row">
@@ -10,15 +10,19 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs fw-bold text-success text-uppercase mb-1">Events Joined</div>
-                        <div class="h5 mb-0 fw-bold text-gray-800">12</div>
+                        <div class="h5 mb-0 fw-bold text-gray-800">{{ event_count }}</div>
                     </div>
                     <div class="col-auto"><i class="bi bi-calendar-event fs-2 text-success"></i></div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Repeat for other stats like Points, Certificates, etc. -->
+    <div class="col-xl-3 col-md-6 mb-4"><div class="card shadow h-100 py-2"><div class="card-body"><div class="text-uppercase text-success small fw-bold">Workshops</div><div class="h5 mb-0 fw-bold">{{ workshop_count }}</div></div></div></div>
+    <div class="col-xl-3 col-md-6 mb-4"><div class="card shadow h-100 py-2"><div class="card-body"><div class="text-uppercase text-success small fw-bold">Activities</div><div class="h5 mb-0 fw-bold">{{ activity_count }}</div></div></div></div>
+    <div class="col-xl-3 col-md-6 mb-4"><div class="card shadow h-100 py-2"><div class="card-body"><div class="text-uppercase text-success small fw-bold">Certificates</div><div class="h5 mb-0 fw-bold">{{ certificate_count }}</div></div></div></div>
 </div>
+
+<div class="row mb-4"><div class="col-lg-7"><div class="card shadow-sm h-100"><div class="card-header bg-white fw-bold">Upcoming Registered Events</div><div class="card-body">{% for registration in upcoming_events %}<div class="border-bottom py-2"><a class="text-success fw-bold" href="{% url 'event_detail' registration.event.slug %}">{{ registration.event.title }}</a><br><small>{{ registration.event.date }} · {{ registration.event.venue }} · {{ registration.get_status_display }}</small></div>{% empty %}<p class="text-muted mb-0">You have no upcoming event registrations.</p>{% endfor %}</div></div></div><div class="col-lg-5"><div class="card shadow-sm h-100"><div class="card-header bg-white fw-bold">Membership</div><div class="card-body">{% if membership %}<p class="mb-1 fw-bold">{{ membership.membership_type }}</p><span class="badge bg-success">{{ membership.get_status_display }}</span><p class="small text-muted mt-2 mb-0">ID: {{ membership.membership_id }}</p>{% else %}<p class="text-muted">No membership application yet.</p><a class="btn btn-sm btn-success" href="{% url 'membership_register' %}">Apply now</a>{% endif %}</div></div></div></div>
 
 <div class="card shadow-sm mt-4">
     <div class="card-header bg-white">
@@ -35,11 +39,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Tree Plantation</td>
-                        <td>Oct 12, 2023</td>
-                        <td><span class="badge bg-success">Completed</span></td>
-                    </tr>
+                    {% for participation in recent_activities %}<tr><td>{{ participation.activity }}</td><td>{{ participation.activity.activity_date }}</td><td><span class="badge bg-success">{{ participation.status }}</span></td></tr>{% empty %}<tr><td colspan="3" class="text-muted">No recent activity yet.</td></tr>{% endfor %}
                 </tbody>
             </table>
         </div>

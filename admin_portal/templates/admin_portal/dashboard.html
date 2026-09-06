@@ -10,12 +10,17 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs fw-bold text-primary text-uppercase mb-1">Total Users</div>
-                        <div class="h5 mb-0 fw-bold text-gray-800">1,240</div>
+                        <div class="h5 mb-0 fw-bold text-gray-800">{{ user_count }}</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="col-xl-3 col-md-6 mb-4"><div class="card shadow h-100 py-2"><div class="card-body"><div class="text-uppercase text-primary small fw-bold">Volunteers</div><div class="h5 mb-0 fw-bold">{{ volunteer_count }}</div></div></div></div>
+    <div class="col-xl-3 col-md-6 mb-4"><div class="card shadow h-100 py-2"><div class="card-body"><div class="text-uppercase text-primary small fw-bold">Memberships</div><div class="h5 mb-0 fw-bold">{{ membership_count }}</div><small class="text-muted">{{ pending_membership_count }} pending</small></div></div></div>
+    <div class="col-xl-3 col-md-6 mb-4"><div class="card shadow h-100 py-2"><div class="card-body"><div class="text-uppercase text-primary small fw-bold">Upcoming Events</div><div class="h5 mb-0 fw-bold">{{ upcoming_event_count }}</div></div></div></div>
+    <div class="col-xl-3 col-md-6 mb-4"><div class="card shadow h-100 py-2"><div class="card-body"><div class="text-uppercase text-primary small fw-bold">Pending Registrations</div><div class="h5 mb-0 fw-bold">{{ pending_registration_count }}</div></div></div></div>
+    <div class="col-xl-3 col-md-6 mb-4"><div class="card shadow h-100 py-2"><div class="card-body"><div class="text-uppercase text-primary small fw-bold">Certificates</div><div class="h5 mb-0 fw-bold">{{ certificate_count }}</div></div></div></div>
 </div>
 
 <div class="card shadow-sm mt-4">
@@ -35,13 +40,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>#1024</td>
-                        <td>John Doe</td>
-                        <td>john@example.com</td>
-                        <td>Volunteer</td>
-                        <td><button class="btn btn-sm btn-warning">View</button></td>
-                    </tr>
+                    {% for member in recent_users %}<tr><td>#{{ member.id }}</td><td>{{ member.get_full_name|default:member.username }}</td><td>{{ member.email }}</td><td>{% if member.is_staff %}Administrator{% else %}Volunteer{% endif %}</td><td><a class="btn btn-sm btn-warning" href="{% url 'admin:auth_user_change' member.id %}">View</a></td></tr>{% empty %}<tr><td colspan="5" class="text-muted">No registered users yet.</td></tr>{% endfor %}
                 </tbody>
             </table>
         </div>

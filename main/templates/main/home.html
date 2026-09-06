@@ -5,8 +5,8 @@
 <!-- Hero Section -->
 <section class="hero-section text-white d-flex align-items-center" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover; height: 90vh;">
     <div class="container text-center">
-        <h1 class="display-3 fw-bold">Welcome to The Green Community Bangladesh</h1>
-        <p class="lead mt-3">Together for a Sustainable Future</p>
+        <h1 class="display-3 fw-bold">{{ home_content.hero_title|default:'Welcome to The Green Community Bangladesh' }}</h1>
+        <p class="lead mt-3">{{ home_content.hero_subtitle|default:'Together for a Sustainable Future' }}</p>
         <div class="mt-4">
             <a href="{% url 'membership_register' %}" class="btn btn-success btn-lg me-2">Join Us</a>
             <a href="{% url 'events_list' %}" class="btn btn-outline-light btn-lg">Upcoming Events</a>
@@ -40,10 +40,10 @@
 <section class="bg-success text-white py-5">
     <div class="container">
         <div class="row text-center">
-            <div class="col-md-3 mb-4 mb-md-0">
-                <h2 class="display-4 fw-bold">10K+</h2>
-                <p class="lead">Volunteers</p>
-            </div>
+            {% for statistic in statistics %}<div class="col-md-3 mb-4 mb-md-0">
+                <h2 class="display-4 fw-bold">{{ statistic.value }}</h2>
+                <p class="lead">{{ statistic.title }}</p>
+            </div>{% empty %}
             <div class="col-md-3 mb-4 mb-md-0">
                 <h2 class="display-4 fw-bold">50K+</h2>
                 <p class="lead">Trees Planted</p>
@@ -56,6 +56,7 @@
                 <h2 class="display-4 fw-bold">25</h2>
                 <p class="lead">Districts Covered</p>
             </div>
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -68,18 +69,17 @@
             <h2 class="fw-bold">Upcoming Events</h2>
         </div>
         <div class="row">
-            <div class="col-md-4 mb-4">
+            {% for event in events %}<div class="col-md-4 mb-4">
                 <div class="card border-0 shadow-sm h-100">
                     <img src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Event">
                     <div class="card-body">
                         <span class="badge bg-warning text-dark mb-2">Upcoming</span>
-                        <h5 class="card-title">National Tree Plantation Day</h5>
-                        <p class="card-text text-muted small"><i class="bi bi-calendar3 me-2"></i> Dec 15, 2023 | <i class="bi bi-geo-alt me-2"></i> Dhaka</p>
-                        <a href="{% url 'event_details' %}" class="btn btn-sm btn-outline-success">View Details</a>
+                        <h5 class="card-title">{{ event.title }}</h5>
+                        <p class="card-text text-muted small"><i class="bi bi-calendar3 me-2"></i> {{ event.date }} | <i class="bi bi-geo-alt me-2"></i> {{ event.venue }}</p>
+                        <a href="{% url 'event_detail' event.slug %}" class="btn btn-sm btn-outline-success">View Details</a>
                     </div>
                 </div>
-            </div>
-            <!-- Repeat for other events -->
+            </div>{% empty %}<p class="text-center text-muted">Upcoming events will appear here.</p>{% endfor %}
         </div>
     </div>
 </section>
@@ -92,17 +92,16 @@
             <h2 class="fw-bold">Latest News</h2>
         </div>
         <div class="row">
-            <div class="col-md-4 mb-4">
+            {% for article in news %}<div class="col-md-4 mb-4">
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-body">
                         <span class="badge bg-success mb-2">News</span>
-                        <h5 class="card-title">TGCB launches new plastic collection drive</h5>
-                        <p class="text-muted small">Dec 1, 2023</p>
-                        <a href="{% url 'news_details' %}" class="text-decoration-none text-success">Read More <i class="bi bi-arrow-right"></i></a>
+                        <h5 class="card-title">{{ article.title }}</h5>
+                        <p class="text-muted small">{{ article.published_date }}</p>
+                        <a href="{% url 'news_detail' article.slug %}" class="text-decoration-none text-success">Read More <i class="bi bi-arrow-right"></i></a>
                     </div>
                 </div>
-            </div>
-            <!-- Repeat for other news -->
+            </div>{% empty %}<p class="text-center text-muted">News will appear here.</p>{% endfor %}
         </div>
     </div>
 </section>

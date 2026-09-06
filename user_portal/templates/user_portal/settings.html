@@ -1,0 +1,3 @@
+{% extends 'user_portal/base_user_portal.html' %}
+{% block portal_title %}Account Settings{% endblock %}
+{% block portal_content %}<div class="card shadow-sm"><div class="card-body"><h5>Account security</h5><p class="text-muted">Use a unique password and sign out of shared devices when finished.</p><a class="btn btn-success" href="{% url 'user_change_password' %}">Change password</a></div></div>{% endblock %}

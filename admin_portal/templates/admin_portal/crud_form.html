@@ -1,0 +1,8 @@
+{% extends 'admin_portal/base_admin_portal.html' %}
+{% block admin_title %}{{ admin_title }}{% endblock %}
+{% block admin_content %}
+<form method="post" enctype="multipart/form-data" class="card shadow-sm"><div class="card-body">
+{% csrf_token %}{{ form.as_p }}
+<button class="btn btn-success" type="submit">Save</button> <a class="btn btn-outline-secondary" href="{{ cancel_url }}">Cancel</a>
+</div></form>
+{% endblock %}

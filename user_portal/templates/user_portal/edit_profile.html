@@ -1,0 +1,3 @@
+{% extends 'user_portal/base_user_portal.html' %}
+{% block portal_title %}Edit Profile{% endblock %}
+{% block portal_content %}<form method="post" enctype="multipart/form-data" class="card shadow-sm"><div class="card-body">{% csrf_token %}<h5 class="mb-3">Account details</h5>{{ account_form.as_p }}<h5 class="mt-4 mb-3">Volunteer details</h5>{{ profile_form.as_p }}<button class="btn btn-success">Save changes</button></div></form>{% endblock %}

@@ -1,0 +1,3 @@
+{% extends 'admin_portal/base_admin_portal.html' %}
+{% block admin_title %}My Profile{% endblock %}
+{% block admin_content %}<div class="card shadow-sm"><div class="card-body"><h4>{{ request.user.get_full_name|default:request.user.username }}</h4><p class="mb-1">{{ request.user.email }}</p><p class="text-muted">{% if request.user.is_superuser %}Superuser{% else %}Staff administrator{% endif %}</p><a class="btn btn-success" href="{% url 'admin_change_password' %}">Change password</a></div></div>{% endblock %}

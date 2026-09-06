@@ -10,7 +10,9 @@ urlpatterns = [
     path('activities/', views.my_activities, name='user_activities'),
     path('attendance/', views.attendance, name='user_attendance'),
     path('certificates/', views.certificates, name='user_certificates'),
-    path('points/', views.volunteer_points, name='user_points'),
+    path('memberships/', views.memberships, name='user_memberships'),
     path('notifications/', views.notifications, name='user_notifications'),
+    path('notifications/<int:pk>/read/', views.mark_notification_read, name='user_notification_read'),
     path('settings/', views.settings, name='user_settings'),
+    path('change-password/', views.change_password, name='user_change_password'),
 ]
